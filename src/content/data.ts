@@ -4,6 +4,9 @@ export const club = {
   name: "Star Club",
   nepaliName: "स्टार क्लब",
   location: "Gobaraiya, Kanchanpur, Nepal",
+  // To use a real photo: put it in /public (for example hero.jpg) and change these two lines.
+  heroImage: "/hero-court.svg",
+  heroImageAlt: "", // describe the photo here; leave empty for the decorative illustration
   registration: "Not yet registered. Government registration is being prepared.",
 };
 

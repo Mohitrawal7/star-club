@@ -4,6 +4,8 @@ import Link from "next/link";
 import "@fontsource-variable/inter";
 import "@fontsource/noto-sans-devanagari/400.css";
 import "@fontsource/noto-sans-devanagari/600.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import ThemeProvider from "@/components/ThemeProvider";

@@ -1,6 +1,6 @@
 "use client";
 
-import { MenuOutlined } from "@ant-design/icons";
+import { MenuOutlined, StarFilled } from "@ant-design/icons";
 import { Button, Drawer } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -27,7 +27,7 @@ export default function SiteHeader() {
   return (
     <header className="header">
       <div className="container header-row">
-        <Link href="/" className="wordmark">STAR CLUB</Link>
+        <Link href="/" className="wordmark"><StarFilled aria-hidden="true" className="wordmark-star" /> STAR CLUB</Link>
         <nav className="nav-desktop" aria-label="Main">{items}</nav>
         <div className="header-actions">
           <LinkButton href="/join" type="primary">Join Us</LinkButton>

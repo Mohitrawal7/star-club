@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { club } from "@/content/data";
 import { showSamples } from "@/lib/flags";
 import { formatDate } from "@/lib/dates";
 import type { ClubEvent, Notice, Photo, SiteSettings, Sponsor } from "@/content/types";
@@ -9,6 +10,7 @@ export const SampleBadge = () => <span className="sample-badge">Sample</span>;
 export function PageIntro({ title, children }: { title: string; children?: React.ReactNode }) {
   return (
     <div className="page-intro">
+      <Image src={club.heroImage} alt="" fill sizes="100vw" preload unoptimized={club.heroImage.endsWith(".svg")} className="cover" />
       <div className="container">
         <h1>{title}</h1>
         {children && <p>{children}</p>}
