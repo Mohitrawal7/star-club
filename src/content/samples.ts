@@ -11,7 +11,7 @@ export const sampleResults: NonNullable<ClubEvent["results"]> = {
 
 export const samplePhotos: Photo[] = [1, 2, 3, 4, 5, 6].map((n) => ({
   id: `sample-${n}`,
-  src: `/samples/photo-${n}.svg`,
+  src: `/samples/photo-${n}.jpeg`,
   alt: `Sample photo placeholder ${n}`,
   eventSlug: "bhuwan-memorial-futsal-cup",
   sample: true,
