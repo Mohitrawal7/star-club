@@ -9,8 +9,18 @@ export const showSamples =
 
 export const siteLaunched = process.env.SITE_LAUNCHED === "true";
 
-export const siteUrl =
-  process.env.SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
+/** Accepts the address with or without https://, and ignores an empty or broken value. */
+function cleanSiteUrl(...candidates: (string | undefined)[]) {
+  for (const candidate of candidates) {
+    const text = candidate?.trim();
+    if (!text) continue;
+    try {
+      return new URL(/^https?:\/\//i.test(text) ? text : `https://${text}`).origin;
+    } catch {
+      // Try the next value.
+    }
+  }
+  return "http://localhost:3000";
+}
+
+export const siteUrl = cleanSiteUrl(process.env.SITE_URL, process.env.VERCEL_PROJECT_PRODUCTION_URL);
