@@ -118,3 +118,26 @@ img { max-width:100%; height:auto; display:block; border-radius:8px; }
   .mosaic img { width:100%; height:100%; object-fit:cover; }
 }
 @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
+
+.preline { white-space:pre-line; }
+.admin { min-height:80vh; }
+.admin-narrow { max-width:440px; padding-top:48px; padding-bottom:48px; }
+.admin-bar { border-bottom:4px solid var(--teal); padding:12px 0; }
+.admin-bar-row { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.admin-nav { display:flex; flex-wrap:wrap; gap:4px 18px; padding-top:10px; }
+.admin-nav a { padding:6px 0; }
+.admin-body { padding-top:24px; padding-bottom:56px; max-width:860px; }
+.admin-form { display:flex; flex-direction:column; gap:18px; max-width:640px; }
+.admin-form > label { display:flex; flex-direction:column; gap:4px; }
+.admin-form > label:has(input[type="checkbox"]) { flex-direction:row; align-items:flex-start; gap:8px; }
+.admin-field { display:flex; flex-direction:column; gap:5px; }
+.admin-field > label, .admin-field > span { font-weight:600; }
+.admin-field small { color:#3f606b; }
+.admin select { height:40px; border:1px solid #c3d4da; border-radius:8px; padding:0 10px; background:#fff; color:var(--ink); font:inherit; }
+.admin-checks { display:flex; flex-direction:column; gap:6px; }
+.admin-thumb { max-width:220px; max-height:160px; object-fit:contain; border:1px solid var(--line); }
+.admin-toolbar { margin-bottom:16px; }
+.admin-list { list-style:none; padding:0; margin:0; }
+.admin-list li { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); overflow-wrap:anywhere; }
+.status { font-size:.8rem; border:1px solid var(--line); border-radius:4px; padding:0 8px; white-space:nowrap; }
+.status-live { background:var(--soft); border-color:var(--gold); }

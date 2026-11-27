@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { ContactDetails, PageIntro, Section } from "@/components/blocks";
 import { getSettings } from "@/content";
 
+export const revalidate = 3600;
 export const metadata: Metadata = { title: "Contact", description: "Contact Star Club or ask about supporting its activities." };
 
-export default function Contact() {
-  const settings = getSettings();
+export default async function Contact() {
+  const settings = await getSettings();
   return (
     <>
       <PageIntro title="Contact us" />

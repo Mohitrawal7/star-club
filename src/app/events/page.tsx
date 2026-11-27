@@ -5,8 +5,8 @@ import { splitEvents } from "@/content";
 export const revalidate = 3600;
 export const metadata: Metadata = { title: "Events", description: "Upcoming and past Star Club events." };
 
-export default function Events() {
-  const { upcoming, past } = splitEvents();
+export default async function Events() {
+  const { upcoming, past } = await splitEvents();
   return (
     <>
       <PageIntro title="Events" />

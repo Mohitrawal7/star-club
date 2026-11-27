@@ -9,7 +9,8 @@ import "@fontsource/poppins/700.css";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import ThemeProvider from "@/components/ThemeProvider";
-import { club } from "@/content";
+import { club, getSettings } from "@/content";
+import HideOnAdmin from "@/components/HideOnAdmin";
 import { showSamples, siteLaunched, siteUrl } from "@/lib/flags";
 
 export const metadata: Metadata = {
@@ -20,7 +21,8 @@ export const metadata: Metadata = {
   robots: siteLaunched ? undefined : { index: false, follow: false },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const { registration } = await getSettings();
   return (
     <html lang="en">
       <body>
@@ -28,18 +30,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <ThemeProvider>
             <a href="#main" className="skip-link">Skip to content</a>
             {showSamples && (
-              <p className="sample-banner">Preview: items marked “Sample”, including placeholder photos, are not real.</p>
+              <HideOnAdmin><p className="sample-banner">Preview: items marked “Sample”, including placeholder photos, are not real.</p></HideOnAdmin>
             )}
             <SiteHeader />
             <main id="main">{children}</main>
-            <footer className="footer">
+            <HideOnAdmin><footer className="footer">
               <div className="container">
                 <p className="wordmark">STAR CLUB <span lang="ne">{club.nepaliName}</span></p>
                 <p>{club.location}</p>
-                <p>{club.registration}</p>
+                <p>{registration}</p>
                 <p><Link href="/contact">Contact</Link> · <Link href="/privacy">Privacy</Link></p>
               </div>
-            </footer>
+            </footer></HideOnAdmin>
           </ThemeProvider>
         </AntdRegistry>
       </body>

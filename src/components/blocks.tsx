@@ -70,7 +70,7 @@ export function SponsorGrid({ sponsors }: { sponsors: Sponsor[] }) {
           ) : showSamples ? (
             <span className="logo-slot" aria-hidden="true">Sample logo</span>
           ) : null}
-          <span>{s.name}</span>
+          {s.websiteUrl ? <a href={s.websiteUrl} target="_blank" rel="noopener noreferrer">{s.name}</a> : <span>{s.name}</span>}
         </li>
       ))}
     </ul>

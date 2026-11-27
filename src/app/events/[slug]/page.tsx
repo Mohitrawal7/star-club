@@ -6,18 +6,18 @@ import { getEvent, getEvents, getPhotos } from "@/content";
 import { todayInNepal } from "@/lib/dates";
 
 export const revalidate = 3600;
-export const generateStaticParams = () => getEvents().map((e) => ({ slug: e.slug }));
+export const generateStaticParams = async () => (await getEvents()).map((e) => ({ slug: e.slug }));
 
 export async function generateMetadata({ params }: PageProps<"/events/[slug]">): Promise<Metadata> {
-  const event = getEvent((await params).slug);
+  const event = await getEvent((await params).slug);
   return event ? { title: event.title, description: event.summary } : {};
 }
 
 export default async function EventPage({ params }: PageProps<"/events/[slug]">) {
-  const event = getEvent((await params).slug);
+  const event = await getEvent((await params).slug);
   if (!event) notFound();
 
-  const photos = getPhotos(event.slug);
+  const photos = await getPhotos(event.slug);
   const today = todayInNepal();
   const open = event.registrationUrl && event.endDate >= today &&
     (!event.registrationDeadline || event.registrationDeadline >= today);
@@ -35,11 +35,12 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
         <dl className="facts prose">{facts.map((f) => <div key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></div>)}</dl>
         {open && <LinkButton href={event.registrationUrl!} type="primary">Register for this event</LinkButton>}
       </Section>
+      {event.description && <Section title="About the event"><p className="prose preline">{event.description}</p></Section>}
       {event.format && <Section title="Format" tone="soft"><p className="prose">{event.format}</p></Section>}
       {event.results && (
         <Section title="Results">
           {event.results.sample && <p><SampleBadge /> These results are placeholders, not the real outcome.</p>}
-          <dl className="facts prose">{event.results.items.map((r) => <div key={r.label}><dt>{r.label}</dt><dd>{r.value}</dd></div>)}</dl>
+          <dl className="facts prose">{event.results.items.map((r, i) => <div key={`${r.label}-${i}`}><dt>{r.label}</dt><dd>{r.value}</dd></div>)}</dl>
         </Section>
       )}
       {photos.length > 0 && <Section title="Photos"><PhotoGrid photos={photos} /></Section>}

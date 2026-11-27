@@ -15,6 +15,7 @@ const links = [
 export default function SiteHeader() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
+  if (path.startsWith("/admin")) return null;
   const items = links.map(([href, label]) => {
     const active = href === "/" ? path === "/" : path.startsWith(href);
     return (

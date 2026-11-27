@@ -7,12 +7,14 @@ import { club, getNotices, getPhotos, getSettings, splitEvents } from "@/content
 
 export const revalidate = 3600; // keeps upcoming/past correct as dates change
 
-export default function Home() {
-  const { upcoming, past } = splitEvents();
+export default async function Home() {
+  const { upcoming, past } = await splitEvents();
   const featured = upcoming[0] ?? past[0];
-  const photos = getPhotos().slice(0, 6);
-  const notices = getNotices().slice(0, 3);
-  const settings = getSettings();
+  const photos = (await getPhotos()).slice(0, 6);
+  const notices = (await getNotices()).slice(0, 3);
+  const settings = await getSettings();
+  const featuredPhoto = featured ? (await getPhotos(featured.slug))[0] : undefined;
+  const featuredImage = featuredPhoto?.src ?? club.heroImage;
 
   return (
     <>
@@ -27,7 +29,7 @@ export default function Home() {
               <LinkButton href="/join" type="primary" size="large">Apply for membership</LinkButton>
               <LinkButton href="/events" size="large" ghost>View events</LinkButton>
             </div>
-            <p className="hero-note">{club.registration}</p>
+            <p className="hero-note">{settings.registration}</p>
           </div>
           <Link href="/gallery" className="hero-round">
             <span><CameraOutlined aria-hidden="true" /></span>
@@ -68,8 +70,8 @@ export default function Home() {
                 Event details <ArrowRightOutlined aria-hidden="true" />
               </LinkButton>
             </div>
-            <Image src={getPhotos(featured.slug)[0]?.src ?? club.heroImage} alt={getPhotos(featured.slug)[0]?.alt ?? ""} width={800} height={600}
-              unoptimized={(getPhotos(featured.slug)[0]?.src ?? club.heroImage).endsWith(".svg")} sizes="(max-width: 920px) 100vw, 560px" className="feature-image" />
+            <Image src={featuredImage} alt={featuredPhoto?.alt ?? ""} width={800} height={600}
+              unoptimized={featuredImage.endsWith(".svg")} sizes="(max-width: 920px) 100vw, 560px" className="feature-image" />
           </div>
         </section>
       )}

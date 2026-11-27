@@ -1,7 +1,7 @@
 // Shapes mirror the planned Supabase tables, so pages will not change when the database arrives.
 export type Photo = { id: string; src: string; alt: string; eventSlug?: string; sample?: boolean };
 
-export type Sponsor = { name: string; logoSrc?: string; sample?: boolean };
+export type Sponsor = { name: string; logoSrc?: string; websiteUrl?: string; sample?: boolean };
 
 export type ClubEvent = {
   slug: string;
@@ -14,6 +14,7 @@ export type ClubEvent = {
   venue: string;
   organizer: string;
   format?: string;
+  description?: string;
   facts: { label: string; value: string }[];
   results?: { items: { label: string; value: string }[]; sample?: boolean };
   sponsors: Sponsor[];
@@ -30,5 +31,6 @@ export type SiteSettings = {
   address: string;
   socials: { label: string; url?: string }[];
   membershipFormUrl?: string;
+  registration?: string;
   isSample: boolean;
 };

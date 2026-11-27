@@ -4,10 +4,11 @@ import LinkButton from "@/components/LinkButton";
 import { PageIntro, SampleBadge, Section } from "@/components/blocks";
 import { getSettings } from "@/content";
 
+export const revalidate = 3600;
 export const metadata: Metadata = { title: "Join Us", description: "Apply for Star Club membership." };
 
-export default function Join() {
-  const { membershipFormUrl, isSample } = getSettings();
+export default async function Join() {
+  const { membershipFormUrl, isSample } = await getSettings();
   return (
     <>
       <PageIntro title="Apply for membership">Sending an application does not make you a member.</PageIntro>

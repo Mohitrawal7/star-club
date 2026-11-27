@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { NoticeList, PageIntro, Section } from "@/components/blocks";
 import { getNotices } from "@/content";
 
+export const revalidate = 3600;
 export const metadata: Metadata = { title: "Notices", description: "Announcements from Star Club." };
 
-export default function Notices() {
-  const notices = getNotices();
+export default async function Notices() {
+  const notices = await getNotices();
   return (
     <>
       <PageIntro title="Notices" />

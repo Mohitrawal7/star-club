@@ -13,15 +13,17 @@ Next.js (App Router), TypeScript and Ant Design.
     npm run build
 
 ## Content
-Until the database and admin area are built, content lives in `src/content/`.
-`data.ts` holds confirmed information. `samples.ts` holds invented placeholders,
+Once Supabase is connected, admins manage content at `/admin`. See `SETUP.md`.
+Without Supabase, the site uses `src/content/data.ts`. `samples.ts` holds invented placeholders,
 which are always hidden on the Vercel production site.
 
-## Deploy to Vercel
-Import the GitHub repository in Vercel (framework: Next.js).
-Set `SITE_URL` to the live address. Keep `SITE_LAUNCHED=false` until the launch checklist passes.
-Do not set secrets in the code or commit `.env.local`.
+## Database
+`supabase/setup.sql` creates tables, access rules and storage. `supabase/tests/` is for a local
+PostgreSQL database only (load local-stubs.sql, then setup.sql, then rls.sql). Never run it on Supabase.
+
+## Security
+Row Level Security enforces who can read and write. Only the publishable key is used.
 
 ## Status
-- Done: project setup, theme, public pages
-- Not built yet: Supabase database, sign-in, admin area, uploads
+- Built and tested locally: public pages, database setup, admin sign-in, publishing, uploads
+- Still required: testing on the real Supabase and Vercel projects (SETUP.md step 6)
